@@ -1,0 +1,41 @@
+Package: pkgrescue
+Type: Package
+Title: One-Function Automatic Resolution and Installation of R Packages
+Version: 0.2.0
+Authors@R:
+    person(
+      given = "Quentin",
+      family = "Lamboley",
+      email = "q.lamboley78@gmail.com",
+      role = c("aut", "cre")
+    )
+Description: Resolves and installs an R package from a single call to
+    install_any(). The package first recognises installed packages, CRAN,
+    Bioconductor, the official R-INLA repository, R-universe, public GitHub,
+    public GitLab, package URLs and local sources. It automatically creates a
+    writable user library, reuses an already configured system proxy before
+    trying a direct connection, tries multiple download methods and CRAN
+    mirrors, uses 'pak', 'remotes', 'BiocManager', base R and 'R CMD INSTALL'
+    when appropriate, preserves a complete report, and validates the target
+    namespace in a clean R process. It never embeds a proxy, stores tokens, or
+    runs privileged operating-system commands. External constraints such as
+    missing permissions, private repositories, unavailable hosts,
+    incompatible R versions, and absent system compilers are reported clearly.
+License: MIT + file LICENSE
+URL: https://github.com/QuentinLamboley/pkgrescue
+BugReports: https://github.com/QuentinLamboley/pkgrescue/issues
+Encoding: UTF-8
+LazyData: false
+RoxygenNote: 7.3.2
+Depends: R (>= 4.1.0)
+Imports:
+    tools,
+    utils
+Suggests:
+    BiocManager,
+    jsonlite,
+    pak,
+    pkgbuild,
+    remotes,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
