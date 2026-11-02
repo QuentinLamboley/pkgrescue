@@ -302,6 +302,7 @@
   x <- trimws(reference)
 
   if (file.exists(path.expand(x)) || startsWith(x, "local::")) return("local")
+  if (startsWith(x, "cran::")) return("cran")
   if (startsWith(x, "github::")) return("github")
   if (startsWith(x, "gitlab::")) return("gitlab")
   if (startsWith(x, "bioc::")) return("bioc")
