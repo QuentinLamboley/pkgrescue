@@ -47,7 +47,13 @@
           )
         )
 
-        if (isTRUE(attempt$ok)) return(TRUE)
+        if (isTRUE(attempt$ok)) {
+          if (.ir_fresh_namespace_loadable(package, lib, state)) return(TRUE)
+          .ir_record(state, stage, paste0(
+            "Installer returned without a loadable ", package,
+            " namespace. Trying another mirror, package type or network profile."
+          ), level = "WARNING")
+        }
       }
     }
   }
