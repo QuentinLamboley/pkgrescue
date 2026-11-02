@@ -13,14 +13,17 @@ Invisibly, an object of class \code{pkgrescue_result} on success. On failure,
 }
 \description{
 Resolves and installs a package without requiring source, repository, proxy,
-engine, dependency or diagnostic arguments from the user. It recognises CRAN,
+engine, dependency or diagnostic arguments from the user. It also accepts
+\code{install_any("quarto-pdf")} to prepare and verify Quarto PDF output. It recognises CRAN,
 Bioconductor, the official R-INLA repository, R-universe, public GitHub, public
 GitLab, package URLs, local sources and Git URLs.
 }
 \details{
 The function uses a configured system proxy if present, then tries direct
-network access. It never embeds or saves a proxy. A successful installation is
-validated by loading the target namespace in a fresh R process.
+network access. It never embeds or saves a proxy. A successful R package installation is
+validated by loading the target namespace in a fresh R process. For the
+special \code{quarto-pdf} target, it attempts a real XeLaTeX PDF render,
+installs or updates Quarto TinyTeX when required, then repeats the test.
 }
 \examples{
 \dontrun{
@@ -28,5 +31,6 @@ install_any("ggplot2")
 install_any("INLA")
 install_any("Rsero")
 install_any("nathoze/Rsero")
+install_any("quarto-pdf")
 }
 }
