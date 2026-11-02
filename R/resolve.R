@@ -378,6 +378,11 @@
     )))
   }
 
+  if (identical(type, "cran")) {
+    return(list(.ir_candidate("cran", bare, target = bare,
+      repository = .ir_cran_mirrors[1L], note = "Explicit CRAN reference.")))
+  }
+
   if (identical(type, "bioc")) {
     return(list(.ir_candidate("bioc", bare, target = bare, note = "Explicit Bioconductor reference.")))
   }
