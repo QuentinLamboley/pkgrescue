@@ -4,7 +4,8 @@
 #' package name such as `"INLA"`, `"Rsero"`, or `"ggplot2"`; the package
 #' resolves the source internally. Explicit references such as
 #' `"nathoze/Rsero"`, a package URL, a local source directory, or a Git URL
-#' are also recognised automatically.
+#' are also recognised automatically. The special target `"quarto-pdf"`
+#' installs and verifies the external Quarto/TinyTeX PDF toolchain.
 #'
 #' The function validates a successful installation by loading the requested
 #' namespace in a fresh R process. It uses any proxy already configured by the
@@ -23,6 +24,7 @@
 #' install_any("INLA")
 #' install_any("Rsero")
 #' install_any("nathoze/Rsero")
+#' install_any("quarto-pdf")
 #' }
 install_any <- function(package) {
   if (!is.character(package) || length(package) != 1L || is.na(package) || !nzchar(trimws(package))) {
@@ -30,6 +32,9 @@ install_any <- function(package) {
   }
 
   package <- trimws(package)
+  if (identical(tolower(package), "quarto-pdf")) {
+    return(.ir_install_quarto_pdf(package))
+  }
   state <- .ir_new_state(package)
   library <- .ir_user_library()
   profiles <- .ir_network_profiles()

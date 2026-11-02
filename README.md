@@ -7,6 +7,7 @@ pkgrescue::install_any("ggplot2")
 pkgrescue::install_any("INLA")
 pkgrescue::install_any("Rsero")
 pkgrescue::install_any("nathoze/Rsero")
+pkgrescue::install_any("quarto-pdf")
 ```
 
 There are no repository, proxy, engine, dependency, or diagnostic arguments to
@@ -25,6 +26,34 @@ Fallback:
 install.packages("remotes")
 remotes::install_github("QuentinLamboley/pkgrescue")
 ```
+
+## Prepare Quarto PDF output
+
+Quarto PDF export requires a TeX distribution in addition to any R packages.
+Installing the R package named `tinytex` does not by itself install the
+XeLaTeX executable. To prepare and validate a local Quarto PDF toolchain:
+
+```r
+pkgrescue::install_any("quarto-pdf")
+```
+
+The command locates Quarto, renders a small PDF using XeLaTeX, and checks the
+PDF signature. If rendering fails, it tries `quarto install tinytex --no-prompt`,
+tests again, then tries `quarto update tinytex --no-prompt` and tests again.
+Diagnostic logs and a report are written for every attempt. It does not delete
+existing R packages, remove another TeX installation, or require administrator
+privileges. If Quarto is missing, it reports the official installation page.
+
+After successful validation, render the real document from its project folder:
+
+```sh
+quarto render Data_preparation.qmd --to pdf
+```
+
+A successful smoke test validates the external TeX toolchain. It does not
+guarantee that a particular document has all the required R packages,
+fonts, bibliography resources, or permissions. Quarto's own PDF engine can
+install missing TeX Live packages while rendering.
 
 ## What happens inside `install_any()`
 

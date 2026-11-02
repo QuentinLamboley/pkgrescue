@@ -1,7 +1,7 @@
 Package: pkgrescue
 Type: Package
 Title: One-Function Automatic Resolution and Installation of R Packages
-Version: 0.2.0
+Version: 0.3.0
 Authors@R:
     person(
       given = "Quentin",
@@ -17,7 +17,9 @@ Description: Resolves and installs an R package from a single call to
     trying a direct connection, tries multiple download methods and CRAN
     mirrors, uses 'pak', 'remotes', 'BiocManager', base R and 'R CMD INSTALL'
     when appropriate, preserves a complete report, and validates the target
-    namespace in a clean R process. It never embeds a proxy, stores tokens, or
+    namespace in a clean R process. The dedicated 'quarto-pdf' target checks
+    and repairs the Quarto TinyTeX toolchain by rendering a test PDF. It never
+    embeds a proxy, stores tokens, or
     runs privileged operating-system commands. External constraints such as
     missing permissions, private repositories, unavailable hosts,
     incompatible R versions, and absent system compilers are reported clearly.

@@ -47,7 +47,13 @@
           )
         )
 
-        if (isTRUE(attempt$ok)) return(TRUE)
+        if (isTRUE(attempt$ok)) {
+          if (.ir_fresh_namespace_loadable(package, lib, state)) return(TRUE)
+          .ir_record(state, stage, paste0(
+            "Installer returned without a loadable ", package,
+            " namespace. Trying another mirror, package type or network profile."
+          ), level = "WARNING")
+        }
       }
     }
   }
@@ -370,6 +376,11 @@
       repository = bare,
       note = "Explicit GitLab reference."
     )))
+  }
+
+  if (identical(type, "cran")) {
+    return(list(.ir_candidate("cran", bare, target = bare,
+      repository = .ir_cran_mirrors[1L], note = "Explicit CRAN reference.")))
   }
 
   if (identical(type, "bioc")) {
