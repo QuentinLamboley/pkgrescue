@@ -42,7 +42,16 @@
       )
     )
 
-    if (isTRUE(attempt$ok)) return(TRUE)
+    if (isTRUE(attempt$ok)) {
+      if (is.na(candidate$target) ||
+          .ir_fresh_namespace_loadable(candidate$target, lib, state)) {
+        return(TRUE)
+      }
+      .ir_record(state, "verification", paste0(
+        "Installer completed but ", candidate$target,
+        " was not loadable. Trying the next network profile."
+      ), level = "WARNING")
+    }
   }
 
   FALSE
@@ -71,7 +80,16 @@
       )
     )
 
-    if (isTRUE(attempt$ok)) return(TRUE)
+    if (isTRUE(attempt$ok)) {
+      if (is.na(candidate$target) ||
+          .ir_fresh_namespace_loadable(candidate$target, lib, state)) {
+        return(TRUE)
+      }
+      .ir_record(state, "verification", paste0(
+        "Installer completed but ", candidate$target,
+        " was not loadable. Trying the next network profile."
+      ), level = "WARNING")
+    }
   }
 
   FALSE
@@ -125,7 +143,16 @@
       )
     )
 
-    if (isTRUE(attempt$ok)) return(TRUE)
+    if (isTRUE(attempt$ok)) {
+      if (is.na(candidate$target) ||
+          .ir_fresh_namespace_loadable(candidate$target, lib, state)) {
+        return(TRUE)
+      }
+      .ir_record(state, "verification", paste0(
+        "Installer completed but ", candidate$target,
+        " was not loadable. Trying the next network profile."
+      ), level = "WARNING")
+    }
   }
 
   FALSE
