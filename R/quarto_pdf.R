@@ -78,6 +78,9 @@
 
   input <- file.path(directory, "pkgrescue-check.qmd")
   output <- file.path(directory, "pkgrescue-check.pdf")
+  old_dir <- getwd()
+  setwd(directory)
+  on.exit(setwd(old_dir), add = TRUE, after = FALSE)
   writeLines(
     c(
       "---",
@@ -95,7 +98,7 @@
 
   command_ok <- .ir_quarto_run(
     executable,
-    c("render", shQuote(normalizePath(input, winslash = "/", mustWork = TRUE)),
+    c("render", shQuote(basename(input)),
       "--to", "pdf", "--output", "pkgrescue-check.pdf"),
     state, stage
   )
